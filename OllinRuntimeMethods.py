@@ -151,30 +151,30 @@ class ollin_object_detection:
             return obstacleList
 
 
-class API_tools:
+#class API_tools:
 
-    def store(image):
-        print("API : storing")
-        fileName = werkzeug.utils.secure_filename(image.filename)
-        image.save('testFolder/' + fileName)
-        print("API : stored " + fileName)
-        return fileName
+#    def store(image):
+#        print("API : storing")
+#        fileName = werkzeug.utils.secure_filename(image.filename)
+#       image.save('testFolder/' + fileName)
+#        print("API : stored " + fileName)
+#       return fileName
+#
+#    def pullFromDB(fileName):
+#        print("API : loading")
+#        path = ('testFolder/' + fileName)
+#        image = cv2.imread(path)
+#        print("API : loaded " + fileName)
+#        return image
 
-    def pullFromDB(fileName):
-        print("API : loading")
-        path = ('testFolder/' + fileName)
-        image = cv2.imread(path)
-        print("API : loaded " + fileName)
-        return image
+#    def debugImages(image):
+#        print("API : placing image in debug folder")
+#        file_name = werkzeug.utils.secure_filename(image.filename)
+#        image.save('debug/' + file_name)
+#        print("API : image placed")
 
-    def debugImages(image):
-        print("API : placing image in debug folder")
-        file_name = werkzeug.utils.secure_filename(image.filename)
-        image.save('debug/' + file_name)
-        print("API : image placed")
-
-    def deleteImage(file_name):
-        print("API : clearing image from cache")
-        path = ('testFolder/' + file_name)
-        os.remove(path)
-        print("API : cleared image")
+#    def deleteImage(file_name):
+#        print("API : clearing image from cache")
+#        path = ('testFolder/' + file_name)
+#        os.remove(path)
+#        print("API : cleared image")
