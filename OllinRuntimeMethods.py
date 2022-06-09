@@ -19,21 +19,31 @@ class ollin_object_detection:
         comma = ", "
         return_list = []
 
-        # FIND A WAY TO COUNT OBSTACLES DETECTED AND GENERATE A DECENT TTS
-        object_list = ["person", "bench", "chair", "cat", "dog", "sofa",
-                       "potted plant", "bed", "dining table", "toilet", "tv monitor", "sink", "vase"]
-        object_plural_list = ["people", "benches", "chairs", "cats", "dogs", "sofas",
-                              "potted plants", "beds", "dining tables", "toilets", "tv monitors", "sinks", "vases"]
-        object_count_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # generates
+        object_list = ["person", "train", "bench", "cat", "dog", "chair", "sofa", "pottedplant", "bed", "diningtable",
+                       "toilet",
+                       "tvmonitor", "sink", "vase", "bicycle", "car", "motorbike", "truck"]
+        object_plural_list = ["people", "trains", "benches", "cats", "dogs", "chairs", "sofas", "potted plants", "beds",
+                              "dining tables", "toilets", "tv monitors", "sinks", "vases", "bicycles", "cars",
+                              "motorbikes", "trucks"]
+        object_count_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-        for i in object_string_list:
-            index = object_list.index(i)
-            object_count_list[index] = object_count_list[index] + 1
+        # print(len(object_string_list))
+        # for f in object_string_list:
+        #     print(f)
 
-        y = 0
-        while y < len(object_count_list):
-            temp_index = y
-            temp_count = object_count_list[y]
+        for obj in object_string_list:
+            for x in range(len(object_list)):
+                if obj == object_list[x]:
+                    object_count_list[x] += 1
+
+        # for v in range(len(object_list)):
+        #     print(object_list[v] + " : " + str(object_count_list[v]))
+
+
+        for n in range(len(object_count_list)):
+            temp_count = object_count_list[n]
+            temp_index = n
             if (temp_count > 0):
                 if (temp_count == 1):
                     temp_string = ("one " + object_list[temp_index])
@@ -46,28 +56,35 @@ class ollin_object_detection:
                     return_list.append(temp_string)
                 else:
                     print("unexpected result")
-            y = y + 1
+
+
+        # for p in range(len(return_list)):
+        #     print(return_list[p])
 
         print("STRING BUILDER : objects counted...")
+
         if len(return_list) == 0:
-            return "Objects not detected on your " + side
+            return "Objects not detected on your " + side + "."
         elif len(return_list) == 1:
-            return "On your " + side + comma + return_list[0] + " was detected."
+            return "On your " + side + comma + return_list[0] + " detected."
         elif len(return_list) == 2:
-            return "On your " + side + comma + return_list[0] + " and " + return_list[1] + " was detected."
+            return "On your " + side + comma + return_list[0] + " and " + return_list[1] + " detected."
         elif len(return_list) > 2:
-            return_string = "On your " + side + comma
+            return_string = "On your " + side
             z = 0
-            end_point = len(return_string) - 2
-            last_index = len(return_string) - 1
+            end_point = len(return_list) - 1
             while z < len(return_list):
                 if z == end_point:
-                    return_string = return_string + " and " + return_list[last_index] + " was detected."
+                    return_string = return_string + " and " + return_list[end_point] + " detected."
                     break
-            return_string = return_string + comma + return_list[z]
-            z = z + 1
+                return_string = return_string + comma + return_list[z]
+                z = z + 1
+
         print("STRING BUILDER : returned string = " + return_string)
         return return_string
+
+
+
 
     def path_blocked(left, right, overall):
 
@@ -151,30 +168,29 @@ class ollin_object_detection:
             return obstacleList
 
 
-#class API_tools:
-
-#    def store(image):
-#        print("API : storing")
-#        fileName = werkzeug.utils.secure_filename(image.filename)
-#       image.save('testFolder/' + fileName)
-#        print("API : stored " + fileName)
-#       return fileName
+# class API_tools:
 #
-#    def pullFromDB(fileName):
-#        print("API : loading")
-#        path = ('testFolder/' + fileName)
-#        image = cv2.imread(path)
-#        print("API : loaded " + fileName)
-#        return image
-
-#    def debugImages(image):
-#        print("API : placing image in debug folder")
-#        file_name = werkzeug.utils.secure_filename(image.filename)
-#        image.save('debug/' + file_name)
-#        print("API : image placed")
-
-#    def deleteImage(file_name):
-#        print("API : clearing image from cache")
-#        path = ('testFolder/' + file_name)
-#        os.remove(path)
-#        print("API : cleared image")
+#     def getFileName(image):
+#         print("API : getting filename")
+#         fileName = werkzeug.utils.secure_filename(image.filename)
+#         print("API : filename : " + fileName)
+#         return fileName
+#
+#     def pullFromDB(fileName):
+#         print("API : loading")
+#         path = ('testFolder/' + fileName)
+#         image = cv2.imread(path)
+#         print("API : loaded " + fileName)
+#         return image
+#
+#     def debugImages(image):
+#         print("API : placing image in debug folder")
+#         file_name = werkzeug.utils.secure_filename(image.filename)
+#         image.save('debug/' + file_name)
+#         print("API : image placed")
+#
+#     def deleteImage(file_name):
+#         print("API : clearing image from cache")
+#         path = ('testFolder/' + file_name)
+#         os.remove(path)
+#         print("API : cleared image")
