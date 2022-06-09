@@ -1,2 +1,9 @@
 # ollin_backend
-for deploying
+
+Includes :
+
+Flask API
+python script utilising YOLOv3 object detection
+Dockerfile for containerising
+
+
